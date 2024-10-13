@@ -28,7 +28,7 @@ RedouuTable = {
 app.get('/cpu_usage', (req, res) => {
     if(RedouuTable["VerificationKeyFunc"](req.query.key)) {
         RedouuTable["CpuFunc"].free().then(info => {
-            res.send({ cpu_free : info, cpu_usage: (100 - Number(info)) })
+            res.send({ cpu_free : Math.round(info), cpu_usage: Math.round((100 - Number(info))) })
             RedouuTable["ConsoleDebug"](info) 
         })
     }else{
